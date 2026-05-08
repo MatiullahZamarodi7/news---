@@ -1,0 +1,24 @@
+[
+  {
+    "file": "d:\\programing of computer\\wb disain\\backind\\BlogSystem\\routes\\web.php",
+    "message": "Syntax error: unexpected token 'p'",
+    "line": 50,
+    "timestamp": "2026-04-30T11:43:36.753Z",
+    "solution": "",
+    "keep": true,
+    "resolved": false,
+    "tags": [],
+    "uniqueId": "molf0zzl0i4kvwz6eboj"
+  },
+  {
+    "file": "d:\\programing of computer\\wb disain\\backind\\BlogSystem\\app\\Http\\Controllers\\PostController.php",
+    "message": "Cannot redeclare method PostController::sportNews",
+    "line": 35,
+    "timestamp": "2026-05-01T13:53:46.714Z",
+    "solution": "",
+    "keep": true,
+    "resolved": false,
+    "tags": [],
+    "uniqueId": "momz48uyd7aaagzihyc"
+  }
+]
