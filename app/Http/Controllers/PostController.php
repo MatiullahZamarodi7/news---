@@ -19,28 +19,39 @@ class PostController extends Controller
 
     public function news()
     {
-        $posts = Post::all();
+        $posts = Post::with('user')
+            ->whereHas('user')
+            ->get();
         return view('layouts.news', compact('posts'));
     }
 
     public function sportNews()
     {
-        $posts = Post::all()->where('category_id', '2');
+        $posts = Post::with('user')
+            ->whereHas('user')
+            ->where('category_id', '2')->get();
+
         return view('layouts.sportNews', compact('posts'));
     }
     public function siastNews()
     {
-        $posts = Post::all()->where('category_id', '1');
+        $posts = Post::with('user')
+            ->whereHas('user')
+            ->where('category_id', '1')->get();
         return view('layouts.siastNews', compact('posts'));
     }
     public function TechNews()
     {
-        $posts = Post::all()->where('category_id', '3');
+        $posts = Post::with('user')
+            ->whereHas('user')
+            ->where('category_id', '3')->get();
         return view('layouts.TechNews', compact('posts'));
     }
     public function EconNews()
     {
-        $posts = Post::all()->where('category_id', '4');
+        $posts = Post::with('user')
+            ->whereHas('user')
+            ->where('category_id', '4')->get();
         return view('layouts.EconNews', compact('posts'));
     }
 

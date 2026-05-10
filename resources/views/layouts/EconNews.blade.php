@@ -132,18 +132,33 @@
                                         {{ Str::limit($post->content, 60) }}
                                     </p>
                                     <div class="d-flex justify-content-between">
+                                    <div>
                                         <a href="{{ Route('post.showSingle', $post->slug) }}" class="read-btn">جزئیات
-                                            بیشتر</a>
-                                        @if (auth()->check() && auth()->user()->role == 'admin')
-                                            <form id="deletePost-{{ $post->slug }}"
-                                                action="{{ Route('delete', $post->slug) }}" method="post">
-                                                @csrf   
-                                                @method('DELETE')
-                                                <button type="button" class="btn btn-outline-danger"
-                                                    onclick="confirmDeletePost('{{ $post->slug }}')">delete</button>
-                                            </form>
-                                        @endif
+                                        بیشتر</a>
                                     </div>
+                                    <div class="d-flex">
+                                        @if (auth()->check() && auth()->user()->role == 'admin')
+                                        <form id="deletePost-{{ $post->slug }}"
+                                            action="{{ route('delete', $post->slug) }}" method="POST">
+
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button type="button" class="btn btn-outline-danger"
+                                                onclick="confirmDeletePost('{{ $post->slug }}')">
+                                                delete
+                                            </button>
+
+                                        </form>
+                                        <div>
+                                            <a href="{{ route('post.edit', $post->slug) }}"
+                                            class="btn btn-outline-success ms-2">
+                                            Edit
+                                        </a>
+                                        </div>
+                                    @endif
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

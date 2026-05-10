@@ -136,9 +136,12 @@
                                     {{ Str::limit($post->content, 60) }}
                                 </p>
                                 <div class="d-flex justify-content-between">
-                                    <a href="{{ Route('post.showSingle', $post->slug) }}" class="read-btn">جزئیات
+                                    <div>
+                                        <a href="{{ Route('post.showSingle', $post->slug) }}" class="read-btn">جزئیات
                                         بیشتر</a>
-                                    @if (auth()->check() && auth()->user()->role == 'admin')
+                                    </div>
+                                    <div class="d-flex">
+                                        @if (auth()->check() && auth()->user()->role == 'admin')
                                         <form id="deletePost-{{ $post->slug }}"
                                             action="{{ route('delete', $post->slug) }}" method="POST">
 
@@ -151,7 +154,14 @@
                                             </button>
 
                                         </form>
+                                        <div>
+                                            <a href="{{ route('post.edit', $post->slug) }}"
+                                            class="btn btn-outline-success ms-2">
+                                            Edit
+                                        </a>
+                                        </div>
                                     @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>

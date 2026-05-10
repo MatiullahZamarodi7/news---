@@ -30,4 +30,9 @@ class UserController extends Controller
         // dd($addUser);
         return redirect()->route('login')->with('success', 'Registration successful! You can now log in.');
     }
+
+    public function recovery($id){
+        $user = User::withTrashed()->find($id)->restore();
+        return redirect()->route('showAdminpanel')->with('success' , "یوزر با موفقیت ریکاویری شد !");
+    }
 }

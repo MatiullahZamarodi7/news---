@@ -104,8 +104,27 @@
                             <h2>{{ $post->title }}</h2>
                             <ul>
                                 <li>
-                                    <i class="bx bx-user"></i>
-                                    {{ $post->user->name }}
+                                    @if (auth()->check() &&
+                                            (auth()->user()->role == 'admin' || auth()->id() == $post->user_id || request()->routeIs('profile')))
+                                        <a href="{{ route('admin.user.show', $post->user->id) }}">
+                                            <i>
+                                                <img style="width: 30px; height: 30px; border-radius: 999px;"
+                                                    src="{{ asset('storage/userImg/' . $post->user->photo) }}"
+                                                    alt="">
+                                            </i>
+
+                                            {{ $post->user->name }}
+                                        </a>
+                                    @else
+                                        <i>
+                                            <img style="width: 30px; height: 30px; border-radius: 999px;"
+                                                src="{{ asset('storage/userImg/' . $post->user->photo) }}"
+                                                alt="">
+                                        </i>
+
+                                        {{ $post->user->name }}
+                                    @endif
+
                                 </li>
                                 <li>
                                     <i class="bx bx-calendar"></i>

@@ -191,28 +191,35 @@
                                 </p>
                                 <div class="d-flex justify-content-between">
 
-                                    <a href="{{ Route('post.showSingle', $post->slug) }}" class="read-btn">جزئیات
+                                    <div>
+                                        <a href="{{ Route('post.showSingle', $post->slug) }}" class="read-btn">جزئیات
                                         بیشتر</a>
+                                    </div>
 
 
-                                    @if ((auth()->check() && auth()->user()->role == 'admin') || request()->routeIs('profile'))
-                                        <form id="deleteForm-{{ $post->slug }}"
-                                            action="{{ route('delete', $post->slug) }}" method="POST">
+                                    <div class="d-flex">
+                                        @if ((auth()->check() && auth()->user()->role == 'admin') || request()->routeIs('profile'))
+                                            <form id="deleteForm-{{ $post->slug }}"
+                                                action="{{ route('delete', $post->slug) }}" method="POST">
 
-                                            @csrf
-                                            @method('DELETE')
+                                                @csrf
+                                                @method('DELETE')
 
-                                            <button type="button" class="btn btn-outline-danger"
-                                                onclick="confirmDelete('{{ $post->slug }}')">
-                                                 delete
-                                            </button>
+                                                <button type="button" class="btn btn-outline-danger"
+                                                    onclick="confirmDelete('{{ $post->slug }}')">
+                                                    delete
+                                                </button>
 
-                                        </form>
-                                    @endif
+                                            </form>
+                                        @endif
 
-                                    <a href="{{ route('post.edit', $post->slug) }}" class="btn btn-outline-success ">
-                                        Edit
-                                    </a>
+                                       <div>
+                                         <a href="{{ route('post.edit', $post->slug) }}"
+                                            class="btn btn-outline-success ms-2 ">
+                                            Edit
+                                        </a>
+                                       </div>
+                                    </div>
 
                                 </div>
                             </div>

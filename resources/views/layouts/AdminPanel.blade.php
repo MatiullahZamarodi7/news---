@@ -133,9 +133,6 @@
         </div>
     </div>
 
-    
-
-
 
     <div class="flex h-screen mt-5">
 
@@ -237,6 +234,7 @@
                 </div>
 
 
+
                 <!-- جدول آخرین کاربران -->
                 <div class="bg-white rounded-2xl shadow-md overflow-hidden mb-8">
                     <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
@@ -306,7 +304,9 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 @if ($user->deleted_at)
-                                                    <span class="text-danger" style="cursor: pointer;">♻️</span>
+                                                    <a href="{{ Route('userRecovery' , $user->id) }}">
+                                                        <span class="text-danger" style="cursor: pointer;">♻️</span>
+                                                    </a>
                                                 @else
                                                     <button type="button"
                                                         onclick="confirmDelete({{ $user->id }})">
@@ -324,8 +324,6 @@
                                                 </a>
                                             @endif
                                         </td>
-
-
                                     </tr>
                                 @endforeach
                             </tbody>

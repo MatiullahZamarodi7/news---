@@ -11,15 +11,28 @@ class AdminpanelController extends Controller
     public function showAdminpanel()
     {
         $users = User::withTrashed()->get();
-        // $users = User::all();
-        $posts = Post::all();
+
+        $posts = Post::with('user')
+            ->whereHas('user')
+            ->get();
+
         return view('layouts.AdminPanel', compact('users', 'posts'));
     }
 
     public function adminUserShow($id)
     {
         $user = User::findOrFail($id);
+
+        // فقط ادمین یا خود یوزر اجازه دارد
+        if (
+            auth()->user()->role !== 'admin' &&
+            auth()->id() !== $user->id
+        ) {
+            abort(404);
+        }
+
         $posts = $user->posts;
+
         return view('layouts.adminProfile', compact('user', 'posts'));
     }
 
@@ -60,6 +73,6 @@ class AdminpanelController extends Controller
     {
         $user = User::find($id);
         $user->delete($id);
-        return redirect()->route('showAdminpanel')->with('success', 'پست با موفقیت حذف شد');
+        return redirect()->route('showAdminpanel')->with('success', 'یوزیر با موفقیت حذف شد');
     }
 }

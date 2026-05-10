@@ -70,4 +70,8 @@ Route::middleware(['admin'])->group(function () {
 
     Route::delete('/deleteUser/{id}', [AdminpanelController::class, 'deleteUser'])->middleware('auth')->name('deleteUser');
 });
+Route::get('/ali', function () {
+    dd('maitullah zamarodi');
+});
 
+Route::get('recoverUser/{id}' , [UserController::class , 'recovery'])->name('userRecovery')->middleware('auth');
