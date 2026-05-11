@@ -53,7 +53,20 @@
 
 
     <script>
-        function confirmDelete(id) {
+        function confirmDelete(id, role) {
+
+            if (role === 'admin') {
+
+                Swal.fire({
+                    title: 'خطا!',
+                    text: 'شما نمی‌توانید ادمین را حذف کنید!',
+                    icon: 'error',
+                    confirmButtonText: 'باشه'
+                });
+
+                return;
+            }
+
             Swal.fire({
                 title: 'مطمئن هستی؟',
                 text: "این عمل قابل برگشت نیست!",
@@ -64,9 +77,11 @@
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#3085d6'
             }).then((result) => {
+
                 if (result.isConfirmed) {
                     document.getElementById('deleteForm-' + id).submit();
                 }
+
             });
         }
     </script>
@@ -304,12 +319,13 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 @if ($user->deleted_at)
-                                                    <a href="{{ Route('userRecovery' , $user->id) }}">
+                                                    <a href="{{ Route('userRecovery', $user->id) }}">
                                                         <span class="text-danger" style="cursor: pointer;">♻️</span>
                                                     </a>
                                                 @else
+                                                {{-- //اگر در این قسمت بیدون سویت الرت هم فورم ارسال شود باز پالیسی برایش اجازه نمی  دهد اگر این نباشه , '{{ $user->role }}' --}}
                                                     <button type="button"
-                                                        onclick="confirmDelete({{ $user->id }})">
+                                                        onclick="confirmDelete({{ $user->id }}, '{{ $user->role }}')">
                                                         🗑️
                                                     </button>
                                                 @endif

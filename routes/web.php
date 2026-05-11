@@ -68,7 +68,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/AdminProfile/{id}', [AdminpanelController::class, 'AdminProfile'])->name('AdminProfile')->middleware('auth');
     Route::PUT('/AdminProfileEdit/{id}', [AdminpanelController::class, 'AdminProfileEdit'])->name('AdminProfile.update')->middleware('auth');;
 
-    Route::delete('/deleteUser/{id}', [AdminpanelController::class, 'deleteUser'])->middleware('auth')->name('deleteUser');
+    Route::delete('/deleteUser/{user}', [AdminpanelController::class, 'deleteUser'])->middleware('auth')->name('deleteUser');
 });
 Route::get('/ali', function () {
     dd('maitullah zamarodi');

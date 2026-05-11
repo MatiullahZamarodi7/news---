@@ -114,7 +114,7 @@
             </div>
             <div class="row pt-45">
                 @foreach ($posts as $post)
-                    <div class="col-lg-4 col-md-6">
+                    <div class=" col-lg-4 col-md-6">
                         <div class="blog-item">
                             <a href="{{ Route('post.showSingle', $post->slug) }}">
                                 <img style="height: 270px; width: 100%;" <img

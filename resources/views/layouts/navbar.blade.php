@@ -77,6 +77,7 @@
                          <a href="{{ Route('TechtNews') }}">
                              اخبار تکنالوژی
                          </a>
+
                      </li>
                  </ul>
              </li>

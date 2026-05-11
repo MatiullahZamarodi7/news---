@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 
 class AdminpanelController extends Controller
 {
+    use AuthorizesRequests;
     public function showAdminpanel()
     {
         $users = User::withTrashed()->get();
@@ -69,10 +72,15 @@ class AdminpanelController extends Controller
     }
 
 
-    public function deleteUser($id)
+
+    public function deleteUser(User $user)
     {
-        $user = User::find($id);
-        $user->delete($id);
-        return redirect()->route('showAdminpanel')->with('success', 'یوزیر با موفقیت حذف شد');
+        try {
+            $this->authorize('delete', $user);
+            $user->delete($user);
+            return redirect()->route('showAdminpanel')->with('success', 'یوزیر با موفقیت حذف شد');
+        } catch (AuthorizationException  $e) {
+            return redirect()->route('showAdminpanel')->with('success', "این ادمین است نمی توانید انرا دلیت کنید!");
+        }
     }
 }

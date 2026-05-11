@@ -92,6 +92,7 @@ class PostController extends Controller
     //برای نمایش همه پست ها
 
 
+
     function showSingle($slug)
     {
         $post = Post::where('slug', $slug)->firstOrFail();
