@@ -73,5 +73,4 @@ Route::middleware(['admin'])->group(function () {
 Route::get('/ali', function () {
     dd('maitullah zamarodi');
 });
-
 Route::get('recoverUser/{id}' , [UserController::class , 'recovery'])->name('userRecovery')->middleware('auth');

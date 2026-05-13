@@ -13,9 +13,11 @@ class PostController extends Controller
 {
     public function index()
     {
-        $post = Post::latest('id')->first();
+        // $post = Post::latest('id')->first();
+        $post = Post::with('user')->whereHas('user')->latest('id')->first();
         return view('layouts.index', compact('post'));
     }
+
 
     public function news()
     {

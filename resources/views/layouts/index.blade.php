@@ -89,7 +89,7 @@
                 <p class="mb-1">{{ session('success') }}</p>
             </div>
         @endsession
-        <div class="container-fluid">   
+        <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="banner-another">
@@ -133,7 +133,10 @@
                         @if ($post)
                             <div class="col-lg-7">
                                 <div class="testimonials-img">
-                                    <img src="{{ asset('storage/uploads/posts/' . $post->image) }}" alt="Images">
+                                    <img
+                                        src="{{ Storage::disk('public')->exists('uploads/posts/' . $post->image)
+                                            ? asset('storage/uploads/posts/' . $post->image)
+                                            : asset('storage/defualts/nofound.svg') }}">
                                     <div class="content">
                                         <h3>{{ $post->title }}</h3>
                                         <span>پوست مربوط به - صبح کابل- است</span>
@@ -153,7 +156,8 @@
                                     <p>
                                         {{ $post->content }}
                                     </p>
-                                    <span> {{ $post->user->name }}</span>
+                                    <span>
+                                        {{ $post->user->name ? $post->user->name : 'یوزیر مربوط دلیت شده است' }}</span>
                                 </div>
                             </div>
                         @else
